@@ -1,0 +1,1 @@
+# covid-slot-checker-frontend
