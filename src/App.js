@@ -34,7 +34,7 @@ const App = () => {
     delete copiedValues['state'];
     delete copiedValues['district'];
     setPhoneNumber(copiedValues.phone_number)
-    axios.post(`${baseUrl}api/v1/user`, copiedValues).then((response) => {
+    axios.post(`${baseUrl}api/v1/user/`, copiedValues).then((response) => {
       setRequestOTP(true);
     }, (error) => {
       console.log(error);
@@ -106,7 +106,7 @@ const App = () => {
 
   function submitOTP() {
     const data = {"phone_number": phoneNumber, "otp": otp};
-    axios.post(`${baseUrl}api/v1/user/otp/submit`, data).then((response) => {
+    axios.post(`${baseUrl}api/v1/user/otp/submit/`, data).then((response) => {
       alert('Successfully registered for a Whatsapp notification. Stay Safe!')
     }, (error) => {
       console.log(error);
