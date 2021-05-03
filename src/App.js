@@ -137,9 +137,10 @@ const App = () => {
     return (
         <MuiThemeProvider muiTheme={getMuiTheme()}>
             <Styles>
-                <h1>Find a Vaccination Slot on Co-Win</h1>
-                <h2>Get notified via WhatsApp whenever a slot becomes available</h2>
-                <div><img src={"logo.jpeg"} alt="" style={{height : '277px', width : '400px'}} /></div>
+                <h1>Get notified on WhatsApp when a vaccination slot is </h1>
+                <h1>available in your city!</h1>
+                {/*<div><img src={"logo.jpeg"} alt="" style={{height : '200px', width : '300px'}} /></div>*/}
+                <h2>Register below & relax, while we scan Co-win for available slots</h2>
                 {!otpDone ?
                     <Form
                         onSubmit={onSubmit}
