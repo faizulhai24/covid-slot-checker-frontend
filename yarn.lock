@@ -3521,7 +3521,7 @@ cliui@^6.0.0:
     strip-ansi "^6.0.0"
     wrap-ansi "^6.2.0"
 
-clsx@^1.0.4, clsx@^1.1.1:
+clsx@^1.0.4:
   version "1.1.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-1.1.1.tgz"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -9644,13 +9644,6 @@ react-toast-notifications@^2.4.4:
   dependencies:
     "@emotion/core" "^10.0.14"
     react-transition-group "^4.4.1"
-
-react-toastify@^7.0.4:
-  version "7.0.4"
-  resolved "https://registry.npmjs.org/react-toastify/-/react-toastify-7.0.4.tgz"
-  integrity sha512-Rol7+Cn39hZp5hQ/k6CbMNE2CKYV9E5OQdC/hBLtIQU2xz7DdAm7xil4NITQTHR6zEbE5RVFbpgSwTD7xRGLeQ==
-  dependencies:
-    clsx "^1.1.1"
 
 react-transition-group@^1.2.1:
   version "1.2.1"

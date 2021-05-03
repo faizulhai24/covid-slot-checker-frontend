@@ -256,9 +256,9 @@ const App = () => {
                               Reset
                             </button>
                           </div>
-                        <div style={{marginTop: '10px', fontSize:'12px'}}>
+                        <div style={{marginTop: '10px', fontSize:'12px'}} className={'center-align'}>
                           <label>
-                            Don't worry! Your data is safe with us. You can delete it anytime you want
+                            Don't worry! Your data is safe with us. You can delete it anytime you want.
                           </label>
                         </div>
 
