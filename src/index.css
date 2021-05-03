@@ -17,3 +17,6 @@ form {
   background: rgb(255, 255, 255);
 }
 
+.font-roboto {
+  font-family: 'Roboto' !important;
+}

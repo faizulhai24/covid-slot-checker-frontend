@@ -37,6 +37,21 @@ const App = () => {
         delete copiedValues['district'];
 
         setPhoneNumber(copiedValues.phone_number)
+
+        if (copiedValues.phone_number.length !== 10) {
+            addToast("Please enter a 10 digit phone number without country code", {
+                appearance: 'error',
+            })
+            return;
+        }
+
+        if (!copiedValues.message_consent) {
+            addToast("Please allow updates on Whatsapp to register for notification", {
+                appearance: 'error',
+            })
+            return;
+        }
+
         axios.post(`${baseUrl}api/v1/user/`, copiedValues).then((response) => {
             setRequestOTP(true);
             addToast('Please Enter the OTP received on your phone number', {
@@ -137,10 +152,9 @@ const App = () => {
     return (
         <MuiThemeProvider muiTheme={getMuiTheme()}>
             <Styles>
-                <h1>Get notified on WhatsApp when a vaccination slot is </h1>
-                <h1>available in your city!</h1>
-                {/*<div><img src={"logo.jpeg"} alt="" style={{height : '200px', width : '300px'}} /></div>*/}
-                <h2>Register below & relax, while we scan Co-win for available slots</h2>
+                <h1 className={'font-roboto'}>Get notified on WhatsApp when a vaccination slot is </h1>
+                <h1 className={'font-roboto'}>available in your city!</h1>
+                <h2 className={'font-roboto'}>Register below & relax, while we scan Co-win for available slots</h2>
                 {!otpDone ?
                     <Form
                         onSubmit={onSubmit}
