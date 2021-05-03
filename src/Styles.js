@@ -37,11 +37,15 @@ export default styled.div`
   h1 {
     text-align: center;
     color: #222;
+    margin-left: 8px;
+    margin-right:8px;
   }
 
   h2 {
     text-align: center;
     color: #222;
+        margin-left: 8px;
+    margin-right:8px;
   }
 
   & > div {
@@ -57,7 +61,8 @@ export default styled.div`
   }
 
   form {
-    max-width: 500px;
+    width: 500px;
+    max-width: 80vw;
     margin: 10px auto;
     border: 1px solid #ccc;
     padding: 20px;
@@ -96,6 +101,10 @@ export default styled.div`
       background: rgba(0, 0, 0, 0.1);
       box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
       padding: 20px;
+    }
+    
+    .textfield {
+      div {z-index: 0}
     }
   }
 `
