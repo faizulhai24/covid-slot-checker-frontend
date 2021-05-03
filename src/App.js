@@ -56,7 +56,7 @@ const App = () => {
 
     axios.post(`${baseUrl}api/v1/user/`, copiedValues).then((response) => {
       setRequestOTP(true);
-      addToast('Please Enter the OTP received on your phone number', {
+      addToast('Please Enter the OTP received on your WhatsApp', {
         appearance: 'success',
       })
     }, (error) => {
