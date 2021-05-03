@@ -153,7 +153,7 @@ const App = () => {
         <MuiThemeProvider muiTheme={getMuiTheme()}>
             <Styles>
                 <h1 className={'font-roboto'}>Get notified on WhatsApp when a vaccination slot is </h1>
-                <h1 className={'font-roboto'}>available in your city!</h1>
+                <h1 className={'font-roboto'}>available in your city! For 18+ only</h1>
                 <h2 className={'font-roboto'}>Register below & relax, while we scan Co-win for available slots</h2>
                 {!otpDone ?
                     <Form
