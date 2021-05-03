@@ -139,7 +139,7 @@ const App = () => {
             <Styles>
                 <h1>Find a Vaccination Slot on Co-Win</h1>
                 <h2>Get notified via WhatsApp whenever a slot becomes available</h2>
-                <h2><img src={"logo.jpeg"} style={{height : '277px', width : '400px'}} /></h2>
+                <div><img src={"logo.jpeg"} alt="" style={{height : '277px', width : '400px'}} /></div>
                 {!otpDone ?
                     <Form
                         onSubmit={onSubmit}
