@@ -71,7 +71,7 @@ export default styled.div`
     position: relative;
     
 
-    & > .buttons {  
+    .buttons {  
       display: flex;
       flex-flow: row nowrap;
       justify-content: center;
