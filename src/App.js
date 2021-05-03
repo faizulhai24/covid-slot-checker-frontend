@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Styles from './Styles'
-import {Form, Field,} from 'react-final-form'
+import {Field, Form,} from 'react-final-form'
 import {OnChange} from 'react-final-form-listeners'
-import {useState, useEffect} from "react";
 import axios from "axios";
 import _get from 'lodash/get'
 import Select from 'react-select'
@@ -210,6 +209,5 @@ const App = () => {
         </MuiThemeProvider>
     )
 }
-
 
 export default App;
