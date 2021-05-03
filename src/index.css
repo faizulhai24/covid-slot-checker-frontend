@@ -86,9 +86,17 @@ form {
 }
 
 @media (max-width:1025px) {
-  /* big landscape tablets, laptops, and desktops */
+  .footer-left{
+    text-align: center;
+    position:static;
+  }
 
+  .footer-right{
+    text-align: center;
+    position:static;
+  }
 }
+
 @media (max-width:1281px) {
   /* hi-res laptops and desktops */
 }
