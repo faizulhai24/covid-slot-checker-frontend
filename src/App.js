@@ -10,6 +10,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
 import {ToastProvider, useToasts} from 'react-toast-notifications';
+import searchSlotsHelper from './helpers';
 
 
 const App = () => {
@@ -157,7 +158,10 @@ const App = () => {
 
 
   function searchSlots() {
-    //search for Axios slots
+    const freeSlots = searchSlotsHelper([294])
+    if (freeSlots.length > 0) {
+      alert('Found free slots')
+    }
     // setSlotSearchSuccess(true) when successful
   }
 
