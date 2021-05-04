@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, {css} from 'styled-components'
 
 const btn = (light, dark) => css`
   white-space: nowrap;
@@ -106,5 +106,6 @@ export default styled.div`
     .textfield {
       div {z-index: 0}
     }
+    
   }
 `

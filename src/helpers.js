@@ -43,7 +43,7 @@ export default function searchSlotsHelper(district_ids) {
                     }
                 }
             })
-        }, () => alert('Failed to fetch the slots'))
+        }, () => console.log('Failed to fetch the slots'))
 
     return searchResults
 };

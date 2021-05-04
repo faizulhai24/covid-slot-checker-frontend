@@ -11,7 +11,43 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import TextField from 'material-ui/TextField'
 import {ToastProvider, useToasts} from 'react-toast-notifications';
 import searchSlotsHelper from './helpers';
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import {makeStyles} from '@material-ui/core/styles';
 
+let selectedDistricts;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    marginTop: '20px'
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  availability: {
+    color: '#2e2e2e',
+    fontSize: '12px',
+    backgroundColor: ' #a9d18e',
+    padding: '0 10px',
+    display: 'flex',
+    borderRadius: '50px',
+    justifyContent: 'center'
+  },
+  paid: {
+    color: '#fff',
+    fontSize: '9px',
+    backgroundColor: '#2152b3',
+    borderRadius: '20px',
+    padding: '2px 5px',
+  }
+}));
 
 const App = () => {
   const [states, setStates] = useState([]);
@@ -20,6 +56,7 @@ const App = () => {
   const districtRef = useRef(null)
   const stateRef = useRef(null)
   const [otp, setOTP] = useState(0);
+  const [freeSlots, setFreeSlots] = useState(undefined)
   const [otpDone, setOTPDone] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [slotSearchSuccess, setSlotSearchSuccess] = useState(false);
@@ -28,7 +65,7 @@ const App = () => {
   const {addToast} = useToasts()
 
   const onSubmit = values => {
-    if (requestOTP)
+    if (requestOTP || !slotSearchSuccess)
       return
     let copiedValues = JSON.parse(JSON.stringify(values));
     const state_id = values.state.state_id;
@@ -108,6 +145,16 @@ const App = () => {
   }
 
   const ReactSelectDistrictAdapter = ({input, options, ...rest}) => {
+    console.log(options, rest, input)
+
+    function setSelectedDistricts(options) {
+      console.log(options);
+      selectedDistricts = options.map(district => {
+        return district.district_id
+      })
+      input.onChange(options)
+    }
+
     return (
         <Select
             placeholder='Select District...'
@@ -116,6 +163,7 @@ const App = () => {
             options={districts}
             getOptionLabel={(option) => option.district_name}
             getOptionValue={(option) => option.district_id}
+            onChange={(input, options) => setSelectedDistricts(input, options)}
             {...rest}
             searchable/>
 
@@ -158,11 +206,22 @@ const App = () => {
 
 
   function searchSlots() {
-    const freeSlots = searchSlotsHelper([294])
+    const freeSlots = searchSlotsHelper(selectedDistricts)
+    console.log(freeSlots)
+    setSlotSearchSuccess(true);
     if (freeSlots.length > 0) {
-      alert('Found free slots')
+      setFreeSlots(freeSlots)
     }
-    // setSlotSearchSuccess(true) when successful
+  }
+
+  const classes = useStyles();
+
+  function knowMore() {
+    addToast("We are asking you to do this because of existing Whatsapp policy where a number cannot reach out to more than 1000 new users per day. When you message us, Whatsapp does not count it against this quota. ", {
+      appearance: 'info',
+      autoDismiss: false,
+      placement: 'bottom-right'
+    })
   }
 
   return (
@@ -204,59 +263,97 @@ const App = () => {
                             Search
                           </button>
                         </div>
-                       { slotSearchSuccess &&
-                         <div>
-                           <div className='textfield'>
-                             <Field
-                                 name="first_name"
-                                 component={TextFieldAdapter}
-                                 validate={required}
-                                 hintText="Name"
-                                 floatingLabelText="Name"
-                             />
-                           </div>
+                        {freeSlots &&
+                        <div className={classes.root}>
+                          <Grid container spacing={1}>
+                            {freeSlots.map(freeSlot => {
+                              return <Grid item xs>
+                                <Paper className={classes.paper}>
+                                  <div>
+                                    <label>{freeSlot.centerName}</label>
+                                  </div>
+                                  <div style={{fontSize: '12px'}}>
+                                    <label>{freeSlot.districtName}</label>
+                                  </div>
+                                  <div>
+                                    <label>{freeSlot.date}</label>
+                                  </div>
+                                  <div className={classes.availability}>
+                                    <label>{freeSlot.availableCapacity}</label>
+                                  </div>
+                                  <div style = {{fontSize: '12px'}}>
+                                    <label>{freeSlot.vaccine}</label>
+                                  </div>
+                                  <div className={classes.paid}>
+                                    <label>{freeSlot.feeType}</label>
+                                  </div>
+                                </Paper>
+                              </Grid>
+                            })
+                            }
+                          </Grid>
+                        </div>
+                        }
+                        <div className={classes.root}>
+                          <Grid container spacing={1}>
+                            {
 
-                           <div className='textfield'>
-                             <Field
-                                 name="phone_number"
-                                 component={TextFieldAdapter}
-                                 validate={required}
-                                 hintText="Phone Number"
-                                 floatingLabelText="Phone Number (no country code)"
-                             />
-                           </div>
+                            }
+                          </Grid>
+                        </div>
+                        {slotSearchSuccess &&
+                        <div>
+                          <div className='textfield'>
+                            <Field
+                                name="first_name"
+                                component={TextFieldAdapter}
+                                validate={required}
+                                hintText="Name"
+                                floatingLabelText="Name"
+                            />
+                          </div>
 
-                           <div style={{marginTop: '20px'}}>
-                             <Field name="message_consent" component="input" type="checkbox"/>
-                             <label>
-                               Allow updates on WhatsApp
-                             </label>
-                           </div>
+                          <div className='textfield'>
+                            <Field
+                                name="phone_number"
+                                component={TextFieldAdapter}
+                                validate={required}
+                                hintText="Phone Number"
+                                floatingLabelText="Phone Number (no country code)"
+                            />
+                          </div>
 
-                           {!requestOTP &&
-                           <div style={{marginTop: '20px'}}>
+                          <div style={{marginTop: '20px'}}>
+                            <Field name="message_consent" component="input" type="checkbox"/>
+                            <label>
+                              Allow updates on WhatsApp
+                            </label>
+                          </div>
 
-                             <div className="buttons">
-                               <button type="submit" disabled={submitting}>
-                                 Submit
-                               </button>
-                               <button
-                                   type="button"
-                                   onClick={form.reset}
-                                   disabled={submitting || pristine}
-                               >
-                                 Reset
-                               </button>
-                             </div>
-                             <div style={{marginTop: '10px', fontSize:'12px'}} className={'center-align'}>
-                               <label>
-                                 Don't worry! Your data is safe with us. You can delete it anytime you want.
-                               </label>
-                             </div>
+                          {!requestOTP &&
+                          <div style={{marginTop: '20px'}}>
 
-                           </div>}
-                         </div>
-                       }
+                            <div className="buttons">
+                              <button type="submit" disabled={submitting}>
+                                Submit
+                              </button>
+                              <button
+                                  type="button"
+                                  onClick={form.reset}
+                                  disabled={submitting || pristine}
+                              >
+                                Reset
+                              </button>
+                            </div>
+                            <div style={{marginTop: '10px', fontSize: '12px'}} className={'center-align'}>
+                              <label>
+                                Don't worry! Your data is safe with us. You can delete it anytime you want.
+                              </label>
+                            </div>
+
+                          </div>}
+                        </div>
+                        }
 
                         {requestOTP &&
                         <div>
@@ -270,6 +367,13 @@ const App = () => {
                           <button type='submit' onClick={submitOTP}>
                             Submit OTP
                           </button>
+                          <div style={{marginTop: '10px', fontSize: '14px'}} className={'center-align'}>
+                            <label>In case you don't receive the OTP, please click &nbsp;
+                              <a href="http://api.whatsapp.com/send?phone=918047107750&text=Notify%20Me">here</a> &nbsp;
+                               and hit send and you'll be registered.
+                            </label>
+                              <div style={ {color: 'blue', textDecoration: 'underline'}} onClick={knowMore}>Know More</div>
+                          </div>
                         </div>}
 
                       </form>
