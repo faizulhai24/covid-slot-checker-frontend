@@ -21,6 +21,7 @@ const App = () => {
   const [otp, setOTP] = useState(0);
   const [otpDone, setOTPDone] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [slotSearchSuccess, setSlotSearchSuccess] = useState(false);
   const cowinUrl = 'https://cdn-api.co-vin.in/api/v2/admin/location/';
   const baseUrl = 'https://cowin-webserver-slotlocker2.cloud.okteto.net/'
   const {addToast} = useToasts()
@@ -154,16 +155,11 @@ const App = () => {
   const executeScrollDistrict = () => districtRef.current.scrollIntoView()
   const executeScrollState = () => stateRef.current.scrollIntoView()
 
-  // const _moveScreenToTop = () => {
-  //   const rootElement = document.getElementsByTagName('ela-tag');
-  //
-  //   for (let element of rootElement) {
-  //     if (element.getAttribute('id') === hintId) {
-  //       const topPos = element.offsetTop - 70;
-  //       window.scrollTo(0, topPos);
-  //     }
-  //   }
-  // };
+
+  function searchSlots() {
+    //search for Axios slots
+    // setSlotSearchSuccess(true) when successful
+  }
 
   return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -199,33 +195,64 @@ const App = () => {
 
                           />
                         </div>
-
-                        <div className='textfield'>
-                          <Field
-                              name="first_name"
-                              component={TextFieldAdapter}
-                              validate={required}
-                              hintText="Name"
-                              floatingLabelText="Name"
-                          />
+                        <div style={{marginTop: '20px', display: 'flex', justifyContent: 'center'}}>
+                          <button type='submit' onClick={searchSlots}>
+                            Search
+                          </button>
                         </div>
+                       { slotSearchSuccess &&
+                         <div>
+                           <div className='textfield'>
+                             <Field
+                                 name="first_name"
+                                 component={TextFieldAdapter}
+                                 validate={required}
+                                 hintText="Name"
+                                 floatingLabelText="Name"
+                             />
+                           </div>
 
-                        <div className='textfield'>
-                          <Field
-                              name="phone_number"
-                              component={TextFieldAdapter}
-                              validate={required}
-                              hintText="Phone Number"
-                              floatingLabelText="Phone Number (no country code)"
-                          />
-                        </div>
+                           <div className='textfield'>
+                             <Field
+                                 name="phone_number"
+                                 component={TextFieldAdapter}
+                                 validate={required}
+                                 hintText="Phone Number"
+                                 floatingLabelText="Phone Number (no country code)"
+                             />
+                           </div>
 
-                        <div style={{marginTop: '20px'}}>
-                          <Field name="message_consent" component="input" type="checkbox"/>
-                          <label>
-                            Allow updates on Whatsapp
-                          </label>
-                        </div>
+                           <div style={{marginTop: '20px'}}>
+                             <Field name="message_consent" component="input" type="checkbox"/>
+                             <label>
+                               Allow updates on WhatsApp
+                             </label>
+                           </div>
+
+                           {!requestOTP &&
+                           <div style={{marginTop: '20px'}}>
+
+                             <div className="buttons">
+                               <button type="submit" disabled={submitting}>
+                                 Submit
+                               </button>
+                               <button
+                                   type="button"
+                                   onClick={form.reset}
+                                   disabled={submitting || pristine}
+                               >
+                                 Reset
+                               </button>
+                             </div>
+                             <div style={{marginTop: '10px', fontSize:'12px'}} className={'center-align'}>
+                               <label>
+                                 Don't worry! Your data is safe with us. You can delete it anytime you want.
+                               </label>
+                             </div>
+
+                           </div>}
+                         </div>
+                       }
 
                         {requestOTP &&
                         <div>
@@ -241,28 +268,6 @@ const App = () => {
                           </button>
                         </div>}
 
-                        {!requestOTP &&
-                        <div style={{marginTop: '20px'}}>
-
-                          <div className="buttons">
-                            <button type="submit" disabled={submitting}>
-                              Submit
-                            </button>
-                            <button
-                                type="button"
-                                onClick={form.reset}
-                                disabled={submitting || pristine}
-                            >
-                              Reset
-                            </button>
-                          </div>
-                        <div style={{marginTop: '10px', fontSize:'12px'}} className={'center-align'}>
-                          <label>
-                            Don't worry! Your data is safe with us. You can delete it anytime you want.
-                          </label>
-                        </div>
-
-                        </div>}
                       </form>
                   )}
               />
