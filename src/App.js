@@ -374,7 +374,7 @@ const App = () => {
                           </button>
                           <div style={{marginTop: '10px', fontSize: '14px'}} className={'center-align'}>
                             <label>In case you don't receive the OTP, please click
-                              <a href="http://api.whatsapp.com/send?phone=918047107750&text=Notify%20Me" target="_blank" rel="noopener noreferrer">here</a>
+                              <a href="http://api.whatsapp.com/send?phone=918047107750&text=Notify%20Me" target="_blank" rel="noopener noreferrer"> here </a>
                                and hit send and you'll be registered for updates.
                             </label>
                               <div style={ {color: 'blue', textDecoration: 'underline'}} onClick={knowMore}>Know More</div>
