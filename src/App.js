@@ -303,6 +303,11 @@ const App = () => {
                         </div>
                         {slotSearchSuccess &&
                         <div>
+
+                          <div>
+                            <label>No Free slots available. Please register to get notified when a slot opens up</label>
+                          </div>
+                          
                           <div className='textfield'>
                             <Field
                                 name="first_name"
