@@ -17,6 +17,11 @@ form {
   background: rgb(255, 255, 255);
 }
 
+.notice {
+  font-family: 'Roboto' !important;
+  text-align: center;
+}
+
 .font-roboto {
   font-family: 'Roboto' !important;
 }
