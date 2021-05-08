@@ -163,7 +163,13 @@ const App = () => {
             setFetchingSlots(false)
             if (freeSlots.length > 0) {
                 setFreeSlots(freeSlots)
+                return;
             }
+            addToast("No free slots found in the next 2 months", {
+                appearance: 'info',
+                autoDismiss: false
+            })
+
         }, () => console.log('Failed to fetch the slots'))
     }
 

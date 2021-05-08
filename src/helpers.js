@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function searchSlotsHelper(district_ids) {
     const dates = []
-    const NUM_OF_WEEKS = 5
+    const NUM_OF_WEEKS = 8
     const promises = []
 
     for (let i = 0; i < NUM_OF_WEEKS; i++) {
@@ -16,14 +16,6 @@ export function searchSlotsHelper(district_ids) {
             promises.push(axios.get(url))
         }
     }
-
-    // return Promise.all(promises)
-    //     .then(response => {
-    //         response.forEach((resp) => {
-    //             console.log("resp:", resp);
-    //
-    //         })
-    //     }, () => console.log('Failed to fetch the slots'))
 
     return Promise.all(promises)
 };
