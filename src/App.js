@@ -179,7 +179,7 @@ const App = () => {
         <MuiThemeProvider muiTheme={getMuiTheme()}>
             <Styles>
                 <h1 className={'font-roboto'}>Search for a vaccination slot in your city!</h1>
-                <h3 className={'notice'}>Due to new government API limits, we will not be able to send proper notifications on time.</h3>
+                <h3 className={'notice'}>Due to new government API limits, we will not be able to send WhatsApp notifications.</h3>
                 <div className={'notice'}>For people who have already registered, we have deleted your data.</div>
 
                 <Form
